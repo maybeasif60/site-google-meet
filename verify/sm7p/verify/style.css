@@ -1,0 +1,95 @@
+body {
+  background-color: #fff;
+  font-family: "Google Sans", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px; /* Just in case small screen scroll */
+}
+
+.container {
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 25px;
+  width: 360px;
+}
+
+.logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #242424;
+  margin-bottom: 10px;
+}
+
+.phone {
+  width: 220px;
+  margin: 10px 0; /* 🔧 Reduced from 100px to 20px */
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 15px 0 8px;
+  font-weight: 600;
+  color: #222;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+
+.checkbox {
+  margin: 15px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+button {
+  background-color: #1a73e8;
+  border: none;
+  color: white;
+  font-size: 15px;
+  padding: 10px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #1669c1;
+}
+
+/* ✅ Responsive for mobile */
+@media (max-width: 400px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .phone {
+    width: 180px;
+    margin: 15px 0;
+  }
+
+  h1, h2 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+}
