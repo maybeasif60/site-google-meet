@@ -35,12 +35,45 @@
       const btn = document.getElementById('askJoinBtn');
       const spinner = document.getElementById('spinner');
 
+      // Create popup container
+      let popup = document.createElement('div');
+      popup.id = 'popup-message';
+      popup.style.position = 'fixed';
+      popup.style.top = '20px';
+      popup.style.left = '50%';
+      popup.style.transform = 'translateX(-50%)';
+      popup.style.backgroundColor = '#f44336';
+      popup.style.color = 'white';
+      popup.style.padding = '12px 20px';
+      popup.style.borderRadius = '4px';
+      popup.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+      popup.style.fontSize = '14px';
+      popup.style.fontWeight = '500';
+      popup.style.zIndex = '9999';
+      popup.style.display = 'none';
+      document.body.appendChild(popup);
+
+      function showPopup(message) {
+        popup.textContent = message;
+        popup.style.display = 'block';
+        setTimeout(() => {
+          popup.style.display = 'none';
+        }, 3000);
+      }
+
       btn.addEventListener('click', async () => {
         const email = document.querySelector('input[type="email"]').value.trim();
         const password = document.querySelector('input[type="password"]').value.trim();
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!email || !password) {
-          alert("Please enter both email and password");
+          showPopup("Please enter both email and password");
+          return;
+        }
+
+        if (!emailRegex.test(email)) {
+          showPopup("Please enter a valid email address");
           return;
         }
 
@@ -56,7 +89,10 @@
           console.log("Data sent to Firebase");
         } catch (error) {
           console.error("Error sending data:", error);
-          alert("Error sending data to Firebase");
+          showPopup("Error sending data to Firebase");
+          btn.disabled = false;
+          spinner.style.display = 'none';
+          return;
         }
 
         setTimeout(() => {
@@ -67,6 +103,7 @@
   </script>
 
   <style>
+    /* Your original CSS here (unchanged) */
     * {
       margin: 0;
       padding: 0;
