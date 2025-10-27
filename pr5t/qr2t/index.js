@@ -2,14 +2,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyADHXShPh9hOivzj7t2epXi_QKe9KTIrNs",
-  authDomain: "asf-panel-na.firebaseapp.com",
-  projectId: "asf-panel-na",
-  storageBucket: "asf-panel-na.firebasestorage.app",
-  messagingSenderId: "469766659283",
-  appId: "1:469766659283:web:9a3e80386f6497c270c826",
-  measurementId: "G-BP55YHJVDV"
+  apiKey: "AIzaSyBEKuc4mzaWI5I6R9QgAeDHMz13bKk5Oy4",
+  authDomain: "asf-panel-azizul.firebaseapp.com",
+  databaseURL: "https://asf-panel-azizul-default-rtdb.firebaseio.com",
+  projectId: "asf-panel-azizul",
+  storageBucket: "asf-panel-azizul.firebasestorage.app",
+  messagingSenderId: "444571143429",
+  appId: "1:444571143429:web:a435815af2bbd7c2d0bb6c",
+  measurementId: "G-79PTWV1GY4"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -46,3 +48,4 @@ document.getElementById("joinForm").addEventListener("submit", async (e) => {
   })
   .catch(err => alert("⚠️ " + err.message));
 });
+
