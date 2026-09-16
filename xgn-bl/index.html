@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Call</title>
+    
+    <!-- Favicon Add করা হয়েছে -->
+    <link rel="icon" type="image/png" href="Zoom-Logo.png">
+    
+    <!-- FontAwesome for the info icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        /* Logo Section */
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        /* Illustration Section */
+        .illustration-container {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .illustration {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+        }
+
+        /* Join Button */
+        .join-btn {
+            width: 100%;
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 35px;
+            transition: background-color 0.2s;
+        }
+
+        .join-btn:hover {
+            background-color: #0052cc;
+        }
+
+        /* Text Content */
+        .text-content {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .text-content p {
+            font-size: 18px;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .recording-text {
+            font-weight: bold;
+            color: #111111;
+            margin-top: 5px;
+        }
+
+        /* Footer Info Icon */
+        .footer-icon {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            font-size: 24px;
+            color: #333333;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo (এখানে src এ আপনার লোগোর লিংক বা ফাইলের নাম দিন) -->
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Illustration Image (ছবি বা ইলাস্ট্রেশন) -->
+        <div class="illustration-container">
+            <!-- আপনি চাইলে নিচের ছবির বদলে আপনার ইলাস্ট্রেশন ব্যবহার করতে পারেন -->
+            <img src="icon.jpg" alt="Video Call Illustration" class="illustration">
+        </div>
+
+        <!-- Join Button -->
+<a href="./Qwz/" style="text-decoration: none; width: 100%;">
+    <button class="join-btn">Join Meet Call</button>
+</a>
+
+        <!-- Description Text -->
+        <div class="text-content">
+            <p>Google zoom provides easy-to-use video calls for everyone, on any device</p>
+            <p class="recording-text">Recording Not Allowed</p>
+        </div>
+
+        <!-- Info Icon at Bottom Left -->
+        <div class="footer-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+    </div>
+
+</body>
+</html>

